@@ -16,7 +16,6 @@ export default function Modal({
     return () => document.removeEventListener("keydown", handlePressEsc);
   }, [onClose]);
 
-  console.log(onOpen, "open");
   return (
     <>
       {onOpen ? (
