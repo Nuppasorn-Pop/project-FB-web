@@ -1,7 +1,7 @@
 import LoginForm from "../features/authentication/component/LoginForm";
 import RegisterContainer from "../features/authentication/component/RegisterContainer";
 
-export default function LoginPage() {
+function LoginPage() {
   return (
     <div className="bg-white p-4 rounded-lg max-w-sm mx-auto shadow-lg mt-32">
       <LoginForm />
@@ -10,3 +10,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
+export default LoginPage;
