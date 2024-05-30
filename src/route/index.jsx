@@ -7,6 +7,7 @@ import RedirectifLogged from "../features/authentication/component/RedirectifLog
 import { lazy } from "react";
 import { RouterProvider } from "react-router-dom";
 import ProtectedRoute from "../features/authentication/component/ProtectedRoute";
+import ProfilePage from "../pages/ProfilePage";
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const HomePage = lazy(() => import("../pages/HomePage"));
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     ),
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "profile", element: <h1>Profile</h1> },
+      { path: "profile/:userId", element: <ProfilePage /> },
     ],
   },
   {
