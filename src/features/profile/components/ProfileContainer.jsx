@@ -13,10 +13,10 @@ export default function ProfileContainer() {
         <div className="-mt-5">
           <Avatar src={authUser?.profileImage} size={10} />
         </div>
-        <div>
+        <div className="flex-1">
           <ProfileInfo />
         </div>
-        <div className="flex-1 text-right">
+        <div>
           <ProfileAction />
         </div>
       </div>
