@@ -26,7 +26,7 @@ export default function Modal({
               <div className="fixed inset-0 z-40">
                 <div className="flex justify-center items-center min-h-screen">
                   <div
-                    className="bg-white rounded-lg shadow-lg"
+                    className="bg-white rounded-lg shadow-lg "
                     style={{ width: `${width}rem` }}
                     onClick={(e) => e.stopPropagation()}
                   >
