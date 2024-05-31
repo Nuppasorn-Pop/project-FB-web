@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import userApi from "../apis/user";
 import useAuth from "../hooks/useAuth";
 import { RELATIONSHIP_TO_AUTH_USER } from "../constants";
+import relationshipApi from "../apis/relationship";
 
 export const ProfileContext = createContext();
 export default function ProfileContextProvider({ children }) {
@@ -34,11 +35,13 @@ export default function ProfileContextProvider({ children }) {
     }
   }, [authUser, userId]);
 
-  const requestFriend = () => {
+  const requestFriend = async () => {
+    await relationshipApi.requestFriend(userId);
     setRelationShipToAuthUser(RELATIONSHIP_TO_AUTH_USER.RECEVIER);
   };
 
-  const cancelRequest = () => {
+  const cancelRequest = async () => {
+    await relationshipApi.cancelFriend(userId);
     setRelationShipToAuthUser(RELATIONSHIP_TO_AUTH_USER.UNKNOWN);
   };
 
