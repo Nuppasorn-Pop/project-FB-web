@@ -4,10 +4,12 @@ import { createContext } from "react";
 import { useParams } from "react-router-dom";
 import userApi from "../apis/user";
 import useAuth from "../hooks/useAuth";
+import { RELATIONSHIP_TO_AUTH_USER } from "../constants";
 
 export const ProfileContext = createContext();
 export default function ProfileContextProvider({ children }) {
   const [profileUser, setProfileUser] = useState(null);
+  const [relationShipToAuthUser, setRelationShipToAuthUser] = useState("");
   const { userId } = useParams();
   const { authUser } = useAuth();
 
@@ -16,6 +18,7 @@ export default function ProfileContextProvider({ children }) {
       try {
         const res = await userApi.getProfileUser(userId);
         setProfileUser(res.data.user);
+        setRelationShipToAuthUser(res.data.relationShipToAuthUser);
       } catch (err) {
         console.log(err);
       }
@@ -31,7 +34,20 @@ export default function ProfileContextProvider({ children }) {
     }
   }, [authUser, userId]);
 
-  const value = { profileUser };
+  const requestFriend = () => {
+    setRelationShipToAuthUser(RELATIONSHIP_TO_AUTH_USER.RECEVIER);
+  };
+
+  const cancelRequest = () => {
+    setRelationShipToAuthUser(RELATIONSHIP_TO_AUTH_USER.UNKNOWN);
+  };
+
+  const value = {
+    profileUser,
+    relationShipToAuthUser,
+    requestFriend,
+    cancelRequest,
+  };
   // params ==> {userId: '7'} ==> path: "profile/:userId"
 
   return (
