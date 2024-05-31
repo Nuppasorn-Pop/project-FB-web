@@ -1,5 +1,5 @@
 import ProfileContainer from "../features/profile/components/ProfileContainer";
-import ProfileContextProvider from "../features/profile/contexts/ProfileContextProvider";
+import ProfileContextProvider from "../contexts/ProfileContextProvider";
 
 export default function ProfilePage() {
   return (
