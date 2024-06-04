@@ -45,11 +45,29 @@ export default function ProfileContextProvider({ children }) {
     setRelationShipToAuthUser(RELATIONSHIP_TO_AUTH_USER.UNKNOWN);
   };
 
+  const confirmRequest = async () => {
+    await relationshipApi.confirmRequest(userId);
+    setRelationShipToAuthUser(RELATIONSHIP_TO_AUTH_USER.FRIEND);
+  };
+
+  const rejectRequest = async () => {
+    await relationshipApi.rejectRequest(userId);
+    setRelationShipToAuthUser(RELATIONSHIP_TO_AUTH_USER.UNKNOWN);
+  };
+
+  const unfriend = async () => {
+    await relationshipApi.unfriend(userId);
+    setRelationShipToAuthUser(RELATIONSHIP_TO_AUTH_USER.UNKNOWN);
+  };
+
   const value = {
     profileUser,
     relationShipToAuthUser,
     requestFriend,
     cancelRequest,
+    confirmRequest,
+    rejectRequest,
+    unfriend,
   };
   // params ==> {userId: '7'} ==> path: "profile/:userId"
 
