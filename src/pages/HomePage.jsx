@@ -1,5 +1,9 @@
-import React from "react";
+import CreatePostContainer from "../features/post/components/CreatePostContainer";
 
 export default function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <div className="max-w-[44rem] mx-auto py-8">
+      <CreatePostContainer />
+    </div>
+  );
 }

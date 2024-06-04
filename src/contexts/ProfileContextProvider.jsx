@@ -11,6 +11,7 @@ export const ProfileContext = createContext();
 export default function ProfileContextProvider({ children }) {
   const [profileUser, setProfileUser] = useState(null);
   const [relationShipToAuthUser, setRelationShipToAuthUser] = useState("");
+  const [profileUserFriends, setProfileUserFriends] = useState([]);
   const { userId } = useParams();
   const { authUser } = useAuth();
 
@@ -20,6 +21,7 @@ export default function ProfileContextProvider({ children }) {
         const res = await userApi.getProfileUser(userId);
         setProfileUser(res.data.user);
         setRelationShipToAuthUser(res.data.relationShipToAuthUser);
+        setProfileUserFriends(res.data.friends);
       } catch (err) {
         console.log(err);
       }
@@ -48,6 +50,7 @@ export default function ProfileContextProvider({ children }) {
   const confirmRequest = async () => {
     await relationshipApi.confirmRequest(userId);
     setRelationShipToAuthUser(RELATIONSHIP_TO_AUTH_USER.FRIEND);
+    setProfileUserFriends((prev) => [...prev, authUser]);
   };
 
   const rejectRequest = async () => {
@@ -58,6 +61,7 @@ export default function ProfileContextProvider({ children }) {
   const unfriend = async () => {
     await relationshipApi.unfriend(userId);
     setRelationShipToAuthUser(RELATIONSHIP_TO_AUTH_USER.UNKNOWN);
+    setProfileUserFriends((prev) => prev.filter((el) => el.id !== authUser.id));
   };
 
   const value = {
@@ -68,6 +72,7 @@ export default function ProfileContextProvider({ children }) {
     confirmRequest,
     rejectRequest,
     unfriend,
+    profileUserFriends,
   };
   // params ==> {userId: '7'} ==> path: "profile/:userId"
 
